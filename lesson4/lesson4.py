@@ -6,6 +6,7 @@ import re
 from datetime import datetime
 
 current_date = str(datetime.now().date())
+client = MongoClient('localhost',27017)
 
 headers={'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36'}
 
@@ -89,3 +90,7 @@ for new in news5:
 
 pprint(news)
 
+db = client['news']
+news_x = db.news
+news_x.delete_many({})
+news_x.insert_many(news)
